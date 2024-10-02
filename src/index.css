@@ -1,3 +1,11 @@
 body {
     background-color: #31363F;
+    color: floralwhite;
   }
+
+  .card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
