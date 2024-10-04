@@ -1,10 +1,12 @@
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import './Login.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Formik, FormikHelpers } from 'formik';
 import { Login } from '../../fetch/Auth';
 import * as Yup from 'yup';
+import Cookies from 'universal-cookie';
+import { useAuthContext } from '../../context/AuthContext';
 
 interface LoginFormValues {
     email: string;
@@ -12,6 +14,9 @@ interface LoginFormValues {
 }
 
 const LoginPage = () => {
+    const cookies = new Cookies();
+    const { login } = useAuthContext();
+    const navigate = useNavigate();
 
     const onSubmit = async (values: LoginFormValues,
         { setSubmitting, setErrors }: FormikHelpers<LoginFormValues>
@@ -22,11 +27,24 @@ const LoginPage = () => {
                 password: values.password
             }
 
-            const athentication = await Login(data);
-            console.log(athentication);
+            const authentication = await Login(data); // fetch para llamar funcion de authenticacion
+            console.log(authentication);
 
 
-        }catch (error){
+            if (authentication?.status === 200) {
+                cookies.set('user', authentication?.user, { path: '/' });
+                cookies.set('token', authentication?.token, { path: '/' });
+                login();
+                navigate("/dashboard");
+            } else if (authentication?.status === 302) {
+                console.log("credenciales incorrectas")
+                setErrors({ email: 'Usuario o contrasena incorrecto' });
+            }
+
+
+
+
+        } catch (error) {
             console.error('Error login', error)
         }
     };
@@ -51,62 +69,61 @@ const LoginPage = () => {
                                             onSubmit={onSubmit}
                                             validationSchema={validationSchema}
                                         >
-                                        {(
-                                            {values, handleSubmit, handleChange, errors, touched, handleBlur, isSubmitting}
-                                        )=> (
-                                            <form onSubmit={handleSubmit}>
-                                                <div className="mb-md-5 mt-md-4 pb-5">
+                                            {(
+                                                { values, handleSubmit, handleChange, errors, touched, handleBlur, isSubmitting }
+                                            ) => (
+                                                <form onSubmit={handleSubmit}>
+                                                    <div className="mb-md-5 mt-md-4 pb-5">
 
-                                                    <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
-                                                    <p className="text-white-50 mb-5">Please enter your login and password!</p>
+                                                        <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
+                                                        <p className="text-white-50 mb-5">Please enter your login and password!</p>
 
-                                                    <div data-mdb-input-init className="form-outline form-white mb-4">
-                                                        <input 
-                                                        type="email" 
-                                                        id="email" 
-                                                        name="email"
-                                                        value={values.email}
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                        disabled={isSubmitting}
-                                                        error={touched.email && Boolean(errors.email)}
-                                                        helperText={touched.email && errors.email}
-                                                        className="form-control form-control-lg" />
-                                                        <label className="form-label" >Email</label>
+                                                        <div data-mdb-input-init className="form-outline form-white mb-4">
+                                                            <input
+                                                                type="email"
+                                                                id="email"
+                                                                name="email"
+                                                                value={values.email}
+                                                                onChange={handleChange}
+                                                                onBlur={handleBlur}
+                                                                disabled={isSubmitting}
+                                                                error={touched.email && Boolean(errors.email)}
+                                                                helperText={touched.email && errors.email}
+                                                                className="form-control form-control-lg" />
+                                                            <label className="form-label" >Email</label>
+                                                        </div>
+
+                                                        <div data-mdb-input-init className="form-outline form-white mb-4">
+                                                            <input
+                                                                type="password"
+                                                                id="password"
+                                                                name="password"
+                                                                value={values.password}
+                                                                onChange={handleChange}
+                                                                disabled={isSubmitting}
+                                                                error={touched.password && Boolean(errors.password)}
+                                                                helperText={touched.password && errors.password}
+                                                                className="form-control form-control-lg" />
+                                                            <label className="form-label" >Password</label>
+                                                        </div>
+
+                                                        <p><Link to="/forgotPassword" className="small mb-5 pb-lg-2"><a className="text-white-50" >Forgot password?</a></Link></p>
+
+                                                        <button
+                                                            type="submit"
+                                                            data-mdb-button-init data-mdb-ripple-init className="btn btn-outline-light btn-lg px-5"
+                                                        >Login</button>
+
+                                                        <div className="d-flex justify-content-center text-center mt-4 pt-1">
+                                                            <a href="#!" className="text-white"><i className="fab fa-facebook-f fa-lg"></i></a>
+                                                            <a href="#!" className="text-white"><i className="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                                                            <a href="#!" className="text-white"><i className="fab fa-google fa-lg"></i></a>
+                                                        </div>
+
                                                     </div>
 
-                                                    <div data-mdb-input-init className="form-outline form-white mb-4">
-                                                        <input 
-                                                        type="password" 
-                                                        id="password" 
-                                                        name="password"
-                                                        value={values.password}
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                        disabled={isSubmitting}
-                                                        error={touched.password && Boolean(errors.password)}
-                                                        helperText={touched.password && errors.password}
-                                                        className="form-control form-control-lg" />
-                                                        <label className="form-label" >Password</label>
-                                                    </div>
-
-                                                    <p><Link to="/forgotPassword" className="small mb-5 pb-lg-2"><a className="text-white-50" >Forgot password?</a></Link></p>
-
-                                                    <button
-                                                        type="submit"
-                                                        data-mdb-button-init data-mdb-ripple-init className="btn btn-outline-light btn-lg px-5"
-                                                        type="submit">Login</button>
-
-                                                    <div className="d-flex justify-content-center text-center mt-4 pt-1">
-                                                        <a href="#!" className="text-white"><i className="fab fa-facebook-f fa-lg"></i></a>
-                                                        <a href="#!" className="text-white"><i className="fab fa-twitter fa-lg mx-4 px-2"></i></a>
-                                                        <a href="#!" className="text-white"><i className="fab fa-google fa-lg"></i></a>
-                                                    </div>
-
-                                                </div>
-
-                                            </form>
-                                        )}
+                                                </form>
+                                            )}
                                         </Formik>
 
                                         <div>

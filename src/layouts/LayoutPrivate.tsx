@@ -2,6 +2,7 @@ import React from 'react'
 import { useAuthContext } from '../context/AuthContext'
 import { Navigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
+import Dashboard from '../pages/dashboard/Dashboard';
 
 const LayoutPrivate: React.FC = () => {
 
@@ -16,7 +17,7 @@ const LayoutPrivate: React.FC = () => {
 
     return isLoggedIn ? (
         <div>
-            <h1>LayoutPrivate</h1>
+            <Dashboard />
         </div>) : (
         <Navigate to="/login" />
     );
