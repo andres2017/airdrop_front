@@ -3,6 +3,8 @@ import { useAuthContext } from '../context/AuthContext'
 import { Navigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import Dashboard from '../pages/dashboard/Dashboard';
+import SideNavBar from '../components/sideBar/SideBar';
+import HeaderBar from '../components/sideBar/HeaderBar';
 
 const LayoutPrivate: React.FC = () => {
 
@@ -17,7 +19,7 @@ const LayoutPrivate: React.FC = () => {
 
     return isLoggedIn ? (
         <div>
-            <Dashboard />
+            <SideNavBar />
         </div>) : (
         <Navigate to="/login" />
     );

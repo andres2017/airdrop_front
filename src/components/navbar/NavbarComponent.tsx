@@ -40,21 +40,23 @@ const NavbarComponent = () => {
     <Navbar bg="dark" variant="dark" fixed="top">
     <Container>
       <Navbar.Brand as={Link} to="/">Airdrop</Navbar.Brand>
-      <Nav className="ml-auto">
+      
         {islogin ? (
+          <Nav className="ml-auto">
           <div className="d-flex align-items-center">
             <div className="text-white mr-3">{username}</div>
             <Button variant="outline-light" onClick={handleLogout}>
               <i className="fas fa-sign-out-alt"></i> Salir
             </Button>
           </div>
+          </Nav>
         ) : (
-          <div>
+          <Nav className="ml-auto">
             <Nav.Link as={Link} to="/login">Login</Nav.Link>
             <Nav.Link as={Link} to="/register">Registro</Nav.Link>
-          </div>
+          </Nav>
         )}
-      </Nav>
+      
     </Container>
   </Navbar>
   )

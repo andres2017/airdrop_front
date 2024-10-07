@@ -7,6 +7,7 @@ import NotFoundPage from "../pages/notFoundPage/NotFoundPage";
 import LandingPage from "../pages/web/LandingPage";
 import Dashboard from "../pages/dashboard/Dashboard";
 import LayoutPrivate from "../layouts/LayoutPrivate";
+import Airdrop from "../pages/airdrop/Airdrop";
 
 export const router = createBrowserRouter([
     {
@@ -37,7 +38,11 @@ export const router = createBrowserRouter([
                     {
                         index: true,
                         element: <Dashboard />
-                    }
+                    },
+                    {
+                        path: 'airdrop',
+                        element: <Airdrop />
+                    },
                 ]
             }
         ]
