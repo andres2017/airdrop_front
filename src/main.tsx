@@ -5,11 +5,14 @@ import './index.css'
 import { RouterProvider } from 'react-router-dom';
 import { router } from './routers/index.tsx';
 import AuthProvider from './context/AuthContext.tsx';
+import { MetaMaskProvider } from './context/MetaMaskContext.tsx';
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+    <MetaMaskProvider>
+    <RouterProvider router={router} />
+    </MetaMaskProvider>
     </AuthProvider>
   </React.StrictMode>,
 )

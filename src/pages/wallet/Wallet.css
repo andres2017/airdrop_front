@@ -1,0 +1,32 @@
+.wallet-title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.wallet-content {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.wallet-content-text p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.card {
+    margin-top: 20px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1.2rem;
+}
+
+button {
+    font-size: 1rem;
+}

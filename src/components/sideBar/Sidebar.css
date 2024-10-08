@@ -14,4 +14,19 @@
 .container-sidebar{
     background: #27292D;
 }
+
+.sidenav {
+  display: flex;
+}
+
+.container-sidebar {
+  width: 250px; /* Ajusta el ancho del sidebar según sea necesario */
+}
+
+.content-container {
+  flex-grow: 1;
+  padding: 20px; /* Ajusta el padding según sea necesario */
+  margin-left: 250px; /* Ajusta el margen izquierdo para que no se superponga con el sidebar */
+  padding-top: 80px;
+}
   
