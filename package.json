@@ -19,6 +19,7 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "6.4",
     "universal-cookie": "^7.2.0",
+    "web3": "^4.13.0",
     "yup": "^1.4.0"
   },
   "devDependencies": {
