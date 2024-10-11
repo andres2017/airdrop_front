@@ -1,15 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Wallet.css';
 import WalletButtonComponent from '../../components/walletButton/WalletButtonComponent';
 import { useMetaMask } from '../../context/MetaMaskContext';
 import { Card, Col, Container, Row, Button } from 'react-bootstrap';
+import Cookies from 'universal-cookie';
 
 const WalletPage = () => {
+    const cookies = new Cookies();
+    const [address, setAddress] = useState('')
     const { account, balance } = useMetaMask();
+
+    useEffect(() => {
+        getUser();
+      }, [])
+    
+      const getUser = async () => {
+        const user = cookies.get('user')
+        console.log(user.wallet.address);
+        setAddress(user.wallet.address);
+      }
+
     return (
         <Container className='mt-4'>
             <div className='wallet-title text-center mb-4'>
                 <h1>Wallet</h1>
+            </div>
+
+            <div className='wallet-title text-center mb-4'>
+                <h1>{address}</h1>
             </div>
             <div className='wallet-content mb-5'>
                 <div className='wallet-content-text text-center'>
