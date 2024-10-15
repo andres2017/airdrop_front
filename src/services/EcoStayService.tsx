@@ -37,13 +37,6 @@ export const getGCTBalance = async (address: string) => {
     }
 };
 
-/*
- // Distribuir recompensas
-  const reward = await ecoStay.distributeReward(addr2.address, 50);
-  await reward.wait();
-  console.log("Recompensa distribuida a", addr2.address);
-*/
-
 export const distributeReward = async (account: string, address: string, amount:string) => {
     try {
         // Convertir la cantidad a Wei

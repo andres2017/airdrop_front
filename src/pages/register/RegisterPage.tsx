@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Formik, FormikHelpers } from 'formik';
 import { Register } from '../../fetch/Auth';
 import * as Yup from 'yup';
-import Cookies from 'universal-cookie';
+import { distributeReward } from '../../services/RewardService';
 
 interface RegisterFormValues {
     username: string,
@@ -33,7 +33,9 @@ const RegisterPage = () => {
             }
 
             const register = await Register(data); // fetch para llamar funcion de authenticacion
-            console.log(register);
+            console.log(register.data.wallet.address);
+            await handleReward(register.data.wallet.address);
+
             navigate('/login')
 
 
@@ -41,6 +43,17 @@ const RegisterPage = () => {
             console.error('Error login', error)
         }
     };
+
+    const handleReward = async (address: string) => {
+        try {
+            console.log('paso la transaccion', address);
+            const txHash = await distributeReward(address, 35);
+            alert(`Recompensa distribuida con exito. Hash de la transaccion: ${txHash}`);
+
+        } catch (error) {
+            alert(`Error al distribuir la recompensa: ${error.message}`);
+        }
+    }
 
 
     const validationSchema = Yup.object().shape({
