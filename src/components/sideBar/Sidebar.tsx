@@ -59,6 +59,14 @@ class SideNavBar extends React.Component {
                                 <Link to="nfts" className="nav-link">NFTs</Link>
                             </NavText>
                         </NavItem>
+                        <NavItem eventKey="listUser">
+                            <NavIcon>
+                                <i className="fa fa-fw fa-image" style={{ fontSize: "1.75em" }} />
+                            </NavIcon>
+                            <NavText>
+                                <Link to="users" className="nav-link">User List</Link>
+                            </NavText>
+                        </NavItem>
                     </SideNav.Nav>
                 </SideNav>
                 <Container className="content-container">

@@ -10,6 +10,7 @@ import LayoutPrivate from "../layouts/LayoutPrivate";
 import Airdrop from "../pages/airdrop/Airdrop";
 import WalletPage from "../pages/wallet/WalletPage";
 import NftsPages from "../pages/nfts/NftsPages";
+import UsersPage from "../pages/users/usersPage";
 
 export const router = createBrowserRouter([
     {
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
                     {
                         path: 'nfts',
                         element: <NftsPages />
+                    },
+                    {
+                        path: 'users',
+                        element: <UsersPage />
                     },
                 ]
             }

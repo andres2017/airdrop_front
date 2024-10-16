@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import './Wallet.css';
-import WalletButtonComponent from '../../components/walletButton/WalletButtonComponent';
-import { useMetaMask } from '../../context/MetaMaskContext';
 import { Card, Col, Container, Row, Button } from 'react-bootstrap';
 import Cookies from 'universal-cookie';
 import { distributeReward } from '../../services/RewardService';
 import { getGCTBalance } from '../../services/EcoStayService'
-import { Mosaic } from 'react-loading-indicators';
+import LoadingComponent from '../../components/loading/LoadingComponent';
+
 
 const WalletPage = () => {
     const cookies = new Cookies();
     const [address, setAddress] = useState('');
     const [balance, setBalance] = useState(0);
     const [balanceEth, setBalanceEth] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         getUser();
@@ -34,12 +34,13 @@ const WalletPage = () => {
 
     const handleReward = async () => {
         try {
+            setLoading(true);
             console.log('paso la transaccion', address);
             const txHash = await distributeReward(address, 10);
             getTokenBalance();
             alert(`Recompensa distribuida con exito. Hash de la transaccion: ${txHash}`);
             getTokenBalance();
-
+            setLoading(false);
         } catch (error) {
             alert(`Error al distribuir la recompensa: ${error.message}`);
         }
@@ -47,10 +48,11 @@ const WalletPage = () => {
 
     return (
         <Container className='mt-4'>
+            {loading && <LoadingComponent />}
             <div className='wallet-title text-center mb-4'>
                 <h1>Wallet</h1>
                 <Button variant='primary' className='mt-3' onClick={handleReward}>Reward</Button>
-                <Mosaic color={["#33CCCC", "#33CC36", "#B8CC33", "#FCCA00"]} />
+                
             </div>
 
             <Row className='justify-content-center'>
@@ -73,7 +75,7 @@ const WalletPage = () => {
                 </Col>
             </Row>
 
-
+            
 
         </Container>
     );

@@ -1,9 +1,10 @@
 
 import {LoginData, RegisterData, LoginResponse, ForgotPasswordData} from '../interfaces/Auth.interface';
+const urlBase = import.meta.env.VITE_API_URL
 
 export const Login = async (data: LoginData) : Promise<LoginResponse | null> => {
     try{
-        const response = await fetch('http://localhost:5001/api/auth/login', {
+        const response = await fetch(`${urlBase}/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -21,7 +22,7 @@ export const Login = async (data: LoginData) : Promise<LoginResponse | null> => 
 
 export const Register = async (data: RegisterData) : Promise<LoginResponse | null> => {
     try{
-        const response = await fetch('http://localhost:5001/api/user', {
+        const response = await fetch(`${urlBase}/user`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -43,7 +44,7 @@ export const ForgotPassword = async (data: ForgotPasswordData) : Promise<LoginRe
         password: data.password
     }
     try{
-        const response = await fetch(`http://localhost:5001/api/user/forgot/${data.email}`, {
+        const response = await fetch(`${urlBase}/user/forgot/${data.email}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

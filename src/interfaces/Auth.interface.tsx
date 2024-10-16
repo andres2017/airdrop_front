@@ -23,3 +23,9 @@ export interface ForgotPasswordData {
     email: string;
     password: string;
 }
+
+export interface usersResponse{
+    status: number,
+    message: string,
+    user?: Record<string, unknown>,
+}

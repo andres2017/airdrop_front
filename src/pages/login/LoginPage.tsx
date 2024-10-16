@@ -30,7 +30,6 @@ const LoginPage = () => {
             const authentication = await Login(data); // fetch para llamar funcion de authenticacion
             console.log(authentication);
 
-
             if (authentication?.status === 200) {
                 cookies.set('user', authentication?.user, { path: '/' });
                 cookies.set('token', authentication?.token, { path: '/' });
@@ -38,20 +37,20 @@ const LoginPage = () => {
                 navigate("/dashboard");
             } else if (authentication?.status === 302) {
                 console.log("credenciales incorrectas")
-                setErrors({ email: 'Usuario o contrasena incorrecto' });
+                setErrors({ email: 'Usuario o contraseña incorrecto' });
             }
 
-
-
-
         } catch (error) {
-            console.error('Error login', error)
+            console.error('Error login', error);
+            setErrors({ email: 'Error en el servidor. Inténtalo de nuevo más tarde.' });
+        } finally {
+            setSubmitting(false);
         }
     };
 
     const validationSchema = Yup.object().shape({
-        email: Yup.string().required('Email requerido'),
-        password: Yup.string().trim().min(6, 'Minimo 6 caracteres').required('Password requerido')
+        email: Yup.string().email().required('Email requerido'),
+        password: Yup.string().trim().min(6, 'Mínimo 6 caracteres').required('Password requerido')
     })
 
     return (
@@ -87,10 +86,11 @@ const LoginPage = () => {
                                                                 onChange={handleChange}
                                                                 onBlur={handleBlur}
                                                                 disabled={isSubmitting}
-                                                                error={touched.email && Boolean(errors.email)}
-                                                                helperText={touched.email && errors.email}
-                                                                className="form-control form-control-lg" />
+                                                                className={`form-control form-control-lg ${touched.email && errors.email ? 'is-invalid' : ''}`} />
                                                             <label className="form-label" >Email</label>
+                                                            {touched.email && errors.email ? (
+                                                                <div className="invalid-feedback">{errors.email}</div>
+                                                            ) : null}
                                                         </div>
 
                                                         <div data-mdb-input-init className="form-outline form-white mb-4">
@@ -100,11 +100,13 @@ const LoginPage = () => {
                                                                 name="password"
                                                                 value={values.password}
                                                                 onChange={handleChange}
+                                                                onBlur={handleBlur}
                                                                 disabled={isSubmitting}
-                                                                error={touched.password && Boolean(errors.password)}
-                                                                helperText={touched.password && errors.password}
-                                                                className="form-control form-control-lg" />
+                                                                className={`form-control form-control-lg ${touched.password && errors.password ? 'is-invalid' : ''}`} />
                                                             <label className="form-label" >Password</label>
+                                                            {touched.password && errors.password ? (
+                                                                <div className="invalid-feedback">{errors.password}</div>
+                                                            ) : null}
                                                         </div>
 
                                                         <p><Link to="/forgotPassword" className="small mb-5 pb-lg-2"><a className="text-white-50" >Forgot password?</a></Link></p>
@@ -112,6 +114,7 @@ const LoginPage = () => {
                                                         <button
                                                             type="submit"
                                                             data-mdb-button-init data-mdb-ripple-init className="btn btn-outline-light btn-lg px-5"
+                                                            disabled={isSubmitting}
                                                         >Login</button>
 
                                                         <div className="d-flex justify-content-center text-center mt-4 pt-1">
@@ -143,4 +146,4 @@ const LoginPage = () => {
     )
 }
 
-export default LoginPage
+export default LoginPage;

@@ -1,11 +1,12 @@
 import Web3 from 'web3';
 import EcoStayontract from '../contracts/EcoStayTwo.json';
+const addressContract = import.meta.env.VITE_CONTRACT_ADDRESS;
 
 //inicializar web3
 const web3 = new Web3(window.ethereum);
 
 //Address del contrato del DAO
-const contractAddress = '0x232e76d8891B27B0CF9F59Aa61A7bf045551281a';
+const contractAddress = addressContract;
 const contractABI = EcoStayontract.abi;
 const ecoStay = new web3.eth.Contract(contractABI, contractAddress)
 
