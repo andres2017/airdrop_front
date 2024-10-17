@@ -1,3 +1,13 @@
+<p align="center">
+  <a href="https://fuchsia-secret-catfish-820.mypinata.cloud/ipfs/QmYicjW4aKeJcjQ5BXuTHzTh2eBQrbsAe4eExSxLih5jJY" target="blank"><img src="https://fuchsia-secret-catfish-820.mypinata.cloud/ipfs/QmYicjW4aKeJcjQ5BXuTHzTh2eBQrbsAe4eExSxLih5jJY" width="250" alt="Glamping Logo" /></a>
+</p>
+
+[circleci-image]: https://img.shields.io/circleci/build/github/tu-usuario/tu-repo/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/tu-usuario/tu-repo
+
+<p align="center">Una plataforma innovadora que utiliza <a href="http://nodejs.org" target="_blank">Node.js</a> y blockchain para promover el turismo sostenible a través de glampings y recompensas tokenizadas.</p>
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
