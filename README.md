@@ -4,6 +4,7 @@
 
 [circleci-image]: https://img.shields.io/circleci/build/github/tu-usuario/tu-repo/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/tu-usuario/tu-repo
+<a href="https://x.com/cyberandres" target="_blank"><img src="https://img.shields.io/twitter/follow/tu-usuario.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
 
 <p align="center">Una plataforma innovadora que utiliza <a href="http://nodejs.org" target="_blank">Node.js</a> y blockchain para promover el turismo sostenible a través de glampings y recompensas tokenizadas.</p>
 
