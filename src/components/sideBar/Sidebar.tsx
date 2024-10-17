@@ -18,9 +18,11 @@ class SideNavBar extends React.Component {
     }
 
     render() {
+        const { userRole } = this.props;
+        console.log("ROLES:::::: ", userRole);
         return (
             <div className="sidenav">
-                
+
                 <SideNav expanded={this.state.isVisible} className="container-sidebar">
                     <SideNav.Toggle
                         onClick={this.toggleSidebar}
@@ -50,7 +52,7 @@ class SideNavBar extends React.Component {
                                 <Link to="airdrop" className="nav-link">Airdrop</Link>
                             </NavText>
                         </NavItem>
-                        
+
                         <NavItem eventKey="nfts">
                             <NavIcon>
                                 <i className="fa fa-fw fa-image" style={{ fontSize: "1.75em" }} />
@@ -59,14 +61,32 @@ class SideNavBar extends React.Component {
                                 <Link to="nfts" className="nav-link">NFTs</Link>
                             </NavText>
                         </NavItem>
-                        <NavItem eventKey="listUser">
-                            <NavIcon>
-                                <i className="fa fa-fw fa-image" style={{ fontSize: "1.75em" }} />
-                            </NavIcon>
-                            <NavText>
-                                <Link to="users" className="nav-link">User List</Link>
-                            </NavText>
-                        </NavItem>
+                        {
+                            userRole.some(role => role.name === 'ADMIN' || role.name === 'SUPER_ADMIN') && (
+                                <NavItem eventKey="listUser">
+                                    <NavIcon>
+                                        <i className="fa fa-fw fa-image" style={{ fontSize: "1.75em" }} />
+                                    </NavIcon>
+                                    <NavText>
+                                        <Link to="users" className="nav-link">User List</Link>
+                                    </NavText>
+                                </NavItem>
+                            )
+                        }
+
+                        {
+                            userRole.some(role => role.name === 'SUPER_ADMIN') && (
+                                <NavItem eventKey="listRole">
+                                    <NavIcon>
+                                        <i className="fa fa-fw fa-image" style={{ fontSize: "1.75em" }} />
+                                    </NavIcon>
+                                    <NavText>
+                                        <Link to="roles" className="nav-link">Role List</Link>
+                                    </NavText>
+                                </NavItem>
+                            )
+                        }
+
                     </SideNav.Nav>
                 </SideNav>
                 <Container className="content-container">

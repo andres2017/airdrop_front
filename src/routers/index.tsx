@@ -11,6 +11,7 @@ import Airdrop from "../pages/airdrop/Airdrop";
 import WalletPage from "../pages/wallet/WalletPage";
 import NftsPages from "../pages/nfts/NftsPages";
 import UsersPage from "../pages/users/usersPage";
+import RolesPage from "../pages/roles/RolesPage";
 
 export const router = createBrowserRouter([
     {
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
                     {
                         path: 'users',
                         element: <UsersPage />
+                    },
+                    {
+                        path: 'roles',
+                        element: <RolesPage />
                     },
                 ]
             }
