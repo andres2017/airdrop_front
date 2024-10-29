@@ -1,32 +1,54 @@
+/* Wallet.css */
+body {
+    background-color: #0b0c10; /* Fondo oscuro */
+    color: #c5c6c7; /* Texto claro */
+    font-family: 'Roboto', sans-serif; /* Fuente moderna */
+}
+
 .wallet-title {
-    font-size: 2rem;
-    font-weight: bold;
+    margin-bottom: 2rem;
 }
 
-.wallet-content {
-    background-color: #1e1e1e;
-    padding: 20px;
-    border-radius: 8px;
+.futuristic-title {
+    color: #66fcf1; /* Color azul claro */
+    font-size: 3rem; /* Tamaño grande para el título */
+    text-shadow: 0 0 10px rgba(102, 252, 241, 0.5); /* Efecto de sombra */
 }
 
-.wallet-content-text p {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
+.futuristic-card {
+    border-radius: 15px; /* Bordes redondeados */
+    transition: transform 0.2s; /* Transición suave */
 }
 
-.card {
-    margin-top: 20px;
-}
-
-.card-title {
-    font-size: 1.5rem;
-    font-weight: bold;
+.futuristic-card:hover {
+    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
 }
 
 .card-text {
-    font-size: 1.2rem;
+    background: linear-gradient(90deg, rgba(102, 252, 241, 0.2), rgba(0, 0, 0, 0.5));
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 1.2rem; /* Tamaño de fuente un poco más grande */
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Sombra sutil */
+}
+
+.wallet-account {
+    color: #66fcf1; /* Color azul claro */
+    font-weight: bold; /* Negrita */
+    text-shadow: 0 0 15px rgba(102, 252, 241, 0.8); /* Sombra pronunciada */
+    transition: transform 0.2s; /* Transición suave */
+    font-family: 'Orbitron', sans-serif; /* Tipografía futurista */
+    font-size: 1.5rem; /* Tamaño de fuente más grande */
+    word-wrap: break-word; /* Asegurarse de que la dirección larga no se salga */
+    white-space: pre-wrap; /* Permitir el uso de espacios en blanco */
 }
 
 button {
-    font-size: 1rem;
+    background-color: #45a29e; /* Color del botón */
+    border: none; /* Sin borde */
+}
+
+button:hover {
+    background-color: #66fcf1; /* Color al pasar el mouse */
+    color: #0b0c10; /* Texto oscuro al pasar el mouse */
 }

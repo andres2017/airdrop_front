@@ -1,16 +1,22 @@
-import React from 'react'
-import Button from "react-bootstrap/Button";
-import { useMetaMask } from "../../context/MetaMaskContext";
+import Button from 'react-bootstrap/Button';
+import { useMetaMask } from '../../context/MetaMaskContext';
 
+// Definir los tipos esperados del contexto MetaMask
+type MetaMaskContextType = {
+    account: string | null;
+    connectToMetamask: () => Promise<void>;
+    disconnectFromMetaMask: () => void;
+};
 
+// Aplicar los tipos a `useMetaMask`
 const WalletButtonComponent = () => {
-    const { account, connectToMetamask, disconnectFromMetaMask } = useMetaMask();
+    const { account, connectToMetamask, disconnectFromMetaMask } = useMetaMask() as MetaMaskContextType;
 
     return (
         <div>
             {account ? (
                 <div>
-                    <Button onClick={disconnectFromMetaMask}>Disconnet MetaMask</Button>
+                    <Button onClick={disconnectFromMetaMask}>Disconnect MetaMask</Button>
                 </div>
             ) : (
                 <div>
@@ -21,5 +27,4 @@ const WalletButtonComponent = () => {
     );
 };
 
-
-export default WalletButtonComponent
+export default WalletButtonComponent;
