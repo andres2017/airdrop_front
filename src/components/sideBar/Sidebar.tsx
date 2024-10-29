@@ -3,7 +3,7 @@ import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/rea
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 import './Sidebar.css';
 import { Link, Outlet } from "react-router-dom";
-import { Button, Container } from 'react-bootstrap';
+import NavbarComponent from '../../components/navbar/NavbarComponent'; // Asegúrate de importar el componente NavbarComponent
 
 class SideNavBar extends React.Component {
     constructor(props) {
@@ -21,9 +21,12 @@ class SideNavBar extends React.Component {
         const { userRole } = this.props;
         console.log("ROLES:::::: ", userRole);
         return (
-            <div className="sidenav">
-
-                <SideNav expanded={this.state.isVisible} className="container-sidebar">
+            <div>
+                <NavbarComponent isSidebarVisible={this.state.isVisible} />
+                <button className={`hamburger-menu ${this.state.isVisible ? 'expanded' : 'collapsed'}`} onClick={this.toggleSidebar}>
+                    &#9776;
+                </button>
+                <SideNav expanded={this.state.isVisible} className={`sidenav ${this.state.isVisible ? 'expanded' : 'collapsed'}`}>
                     <SideNav.Toggle
                         onClick={this.toggleSidebar}
                     />
@@ -44,15 +47,18 @@ class SideNavBar extends React.Component {
                                 <Link to="wallet" className="nav-link">Wallet</Link>
                             </NavText>
                         </NavItem>
-                        <NavItem eventKey="airdrop">
-                            <NavIcon>
-                                <i className="fa fa-fw fa-line-chart" style={{ fontSize: "1.75em" }} />
-                            </NavIcon>
-                            <NavText>
-                                <Link to="airdrop" className="nav-link">Airdrop</Link>
-                            </NavText>
-                        </NavItem>
-
+                        {
+                            userRole.some(role => role.name === 'ADMIN' || role.name === 'SUPER_ADMIN') && (
+                                <NavItem eventKey="airdrop">
+                                    <NavIcon>
+                                        <i className="fa fa-fw fa-line-chart" style={{ fontSize: "1.75em" }} />
+                                    </NavIcon>
+                                    <NavText>
+                                        <Link to="airdrop" className="nav-link">Airdrop</Link>
+                                    </NavText>
+                                </NavItem>
+                            )
+                        }
                         <NavItem eventKey="nfts">
                             <NavIcon>
                                 <i className="fa fa-fw fa-image" style={{ fontSize: "1.75em" }} />
@@ -89,9 +95,11 @@ class SideNavBar extends React.Component {
 
                     </SideNav.Nav>
                 </SideNav>
-                <Container className="content-container">
-                    <Outlet />
-                </Container>
+                <div className={`main-content ${this.state.isVisible ? '' : 'collapsed'}`}>
+                    <div className="content-container">
+                        <Outlet userRoles={userRole} />
+                    </div>
+                </div>
             </div>
         );
     }
